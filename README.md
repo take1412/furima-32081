@@ -15,26 +15,28 @@
 
 - has_many :items
 - has_many :comments
+- has_many :buy_infos
 
 
 ## itemsテーブル
 
-| Column           | Type       | Option                        |
-| ---------------- | ---------- | ----------------------------- |
-| name             | string     | null: false                   |
-| text             | text       | null: false                   |
-| category         | string     | null: false                   |
-| condition        | string     | null: false                   |
-| shipping_charges | string     | null: false                   |
-| shipping_area    | string     | null: false                   |
-| days_to_ship     | string     | null: false                   |
-| selling_price    | integer    | null: false                   |
-| user             | references | null: false foreign_key: true |
+| Column         | Type       | Option                        |
+| -------------- | ---------- | ----------------------------- |
+| name           | string     | null: false                   |
+| text           | text       | null: false                   |
+| category_id    | integer    | null: false                   |
+| condition_id   | integer    | null: false                   |
+| charges_id     | integer    | null: false                   |
+| prefectures_id | integer    | null: false                   |
+| days_ship_id   | integer    | null: false                   |
+| price          | integer    | null: false                   |
+| user           | references | null: false foreign_key: true |
 
 ## Association
 
 - belongs_to :user
 - has_many :comments
+- has_one :buy_info
 
 ## commentsテーブル
 
@@ -48,3 +50,32 @@
 
 - belongs_to :user
 - belongs_to :item
+
+## buy_infosテーブル
+
+| Column | Type       | Option                        |
+| ------ | ---------- | ----------------------------- |
+| user   | references | null: false foreign_key: true |
+| item   | references | null: false foreign_key: true |
+
+## Association
+
+- belongs_to :user
+- belongs_to :item
+- has_one :adress
+
+## adressesテーブル
+
+| Column         | Type       | Option                        |
+| -------------- | ---------- | ----------------------------- |
+| postal_code    | string     | null: false                   |
+| prefectures_id | integer    | null: false                   |
+| city           | string     | null: false                   |
+| house_num      | string     | null: false                   |
+| house_name     | string     |                               |
+| phone_num      | string     | null: false                   |
+| buy_info       | references | null: false foreign_key: true |
+
+## Association
+
+- bilongs_to :buy_info
