@@ -78,4 +78,4 @@
 
 ## Association
 
-- bilongs_to :buy_info
+- belongs_to :buy_info
