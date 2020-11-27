@@ -13,7 +13,7 @@ class Item < ApplicationRecord
     validates :image
     validates :name
     validates :text
-    validates :price, inclusion: { in: 300..9999999, message: "is invalid. Please input between 300 and 9,999,999."}, format: { with: /\A[0-9]+\z/, message: "is invalid. Input nunber characters."}
+    validates :price, inclusion: { in: 300..9999999, message: "is invalid. Please enter between 300 and 9,999,999 half-width numbers."}
   end
 
   with_options numericality: { other_than: 0, message: "can't be blank"} do
