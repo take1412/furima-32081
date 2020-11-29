@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:index]
   def index
-    @items = Item.includes(:user)
+    # 商品一覧機能実装時に使用 → @items = Item.includes(:user)
   end
 
   def new
