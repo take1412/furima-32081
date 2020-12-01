@@ -15,4 +15,6 @@ class User < ApplicationRecord
   end
 
   has_many :items
+  has_many :buy_infos
+  has_many :adresses , through: :buy_infos
 end
