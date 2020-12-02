@@ -1,5 +1,7 @@
 class BuyInfosController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_item, only: [:index, :create]
+  before_action :move_to_index, only: :index
 
   def index
     @buy_form = BuyForm.new
@@ -25,7 +27,9 @@ class BuyInfosController < ApplicationController
     @item = Item.find(params[:item_id])
   end
 
-
+  def move_to_index
+    redirect_to root_path if current_user.id == @item.user.id || @item.buy_info.present?
+  end
 
   def pay_item
     Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
