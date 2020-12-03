@@ -36,8 +36,14 @@ RSpec.describe BuyForm, type: :model do
         expect(@buy_form.errors.full_messages).to include('Postal code is invalid. Include hyphen(-)')
       end
 
+      it 'prefecture_idが空だと登録できない' do
+        @buy_form.prefecture_id = nil
+        @buy_form.valid?
+        expect(@buy_form.errors.full_messages).to include("Prefecture can't be blank")
+      end
+
       it 'prefecture_idが選択されていないと登録できない' do
-        @buy_form.prefecture_id = '0'
+        @buy_form.prefecture_id = 0
         @buy_form.valid?
         expect(@buy_form.errors.full_messages).to include("Prefecture can't be blank")
       end
@@ -69,7 +75,7 @@ RSpec.describe BuyForm, type: :model do
       it 'phone_numが11文字以上だと登録できない' do
         @buy_form.phone_num = '123456789012'
         @buy_form.valid?
-        expect(@buy_form.errors.full_messages).to include('Phone num is invalid. Input up to 11 numbers without hyphen(-)')
+        expect(@buy_form.errors.full_messages).to include('Phone num is too long (maximum is 11 characters)')
       end
     end
   end
